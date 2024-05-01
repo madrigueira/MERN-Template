@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 
 export const Create = () => {
 
@@ -19,7 +19,7 @@ export const Create = () => {
       if(!id) return;
       setIsNew(false);
       const response = await fetch(
-        `http://localhost:5050/record/${params.id.toString()}`
+        `http://${window.location.hostname}:5050/record/${params.id.toString()}`
       );
       if (!response.ok) {
         const message = `An error has occurred: ${response.statusText}`;
@@ -53,7 +53,7 @@ export const Create = () => {
       let response;
       if (isNew) {
         // if we are adding a new record we will POST to /record.
-        response = await fetch("http://localhost:5050/record", {
+        response = await fetch(`http://${window.location.hostname}:5050/record`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -62,7 +62,7 @@ export const Create = () => {
         });
       } else {
         // if we are updating a record we will PATCH to /record/:id.
-        response = await fetch(`http://localhost:5050/record/${params.id}`, {
+        response = await fetch(`http://${window.location.hostname}:5050/record/${params.id}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
@@ -81,7 +81,6 @@ export const Create = () => {
       navigate("/");
     }
   }
-
 
 
 
