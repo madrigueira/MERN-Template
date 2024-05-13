@@ -5,7 +5,7 @@ export const LoginPage = () => {
   const [records, setRecords] = useState([]);
   useEffect(() => {
     async function getRecords() {
-      const response = await fetch(`http://${window.location.hostname}:5050/record/`);
+      const response = await fetch(`https://${window.location.hostname}:5050/record/`);
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
         console.error(message);
@@ -20,7 +20,7 @@ export const LoginPage = () => {
 
   // This method will delete a record
   async function deleteRecord(id) {
-    await fetch(`http://${window.location.hostname}:5050/record/${id}`, {
+    await fetch(`https://${window.location.hostname}:5050/record/${id}`, {
       method: "DELETE",
     });
     const newRecords = records.filter((el) => el._id !== id);
